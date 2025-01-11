@@ -1,0 +1,97 @@
+<header class="sticky top-0 z-50 w-full">
+  <!-- Gradient Background Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-r from-black via-zinc-900/95 to-black backdrop-blur-2xl"></div>
+
+  <!-- Animated Border -->
+  <div class="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent"></div>
+
+  <!-- Main Content -->
+  <div class="relative max-w-7xl mx-auto">
+    <div class="flex items-center justify-between px-6 h-20">
+      <!-- Left Section: Logo & Navigation -->
+      <div class="flex items-center gap-12">
+        <!-- Animated Logo -->
+        <a href="/" class="group flex items-center">
+          <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-cyan-400 to-indigo-400 group-hover:from-cyan-400 group-hover:via-indigo-400 group-hover:to-cyan-400 transition-all duration-500">
+            NEXUS
+          </span>
+        </a>
+
+        <!-- Desktop Navigation with Hover Effects -->
+        <nav class="hidden lg:flex items-center gap-8">
+          <a *ngFor="let item of menuItems"
+             [href]="item.href"
+             class="relative py-2 text-sm text-white/70 hover:text-white transition-colors duration-300 group">
+            <span>{{ item.label }}</span>
+            <!-- Animated Underline -->
+            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-cyan-500 to-indigo-500 group-hover:w-full transition-all duration-300"></span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Right Section: Actions -->
+      <div class="flex items-center gap-6">
+        <!-- Search Button -->
+        <button class="hidden md:flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-white/70 hover:text-white transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <span class="text-sm">Buscar</span>
+        </button>
+
+        <!-- Connect Button -->
+        <button class="hidden md:flex px-6 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white text-sm font-medium transition-all duration-300 shadow-lg shadow-indigo-500/25">
+          Conectar
+        </button>
+
+        <!-- Theme Toggle -->
+        <button
+          (click)="toggleTheme()"
+          class="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300">
+          <svg
+            [class.hidden]="isDarkMode"
+            class="h-5 w-5 text-white/70"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <svg
+            [class.hidden]="!isDarkMode"
+            class="h-5 w-5 text-white/70"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
+          </svg>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button
+          (click)="toggleMobileMenu()"
+          class="lg:hidden p-2 rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300">
+          <svg class="h-6 w-6 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      *ngIf="isMobileMenuOpen"
+      class="lg:hidden"
+      [@slideDown]>
+      <nav class="px-6 py-4 space-y-4 bg-gradient-to-b from-zinc-900/95 to-black backdrop-blur-xl border-t border-white/5">
+        <a *ngFor="let item of menuItems"
+           [href]="item.href"
+           class="block py-2 text-white/70 hover:text-white transition-colors duration-300">
+          {{ item.label }}
+        </a>
+        <button class="w-full mt-4 px-6 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white text-sm font-medium transition-all duration-300">
+          Conectar
+        </button>
+      </nav>
+    </div>
+  </div>
+</header>
