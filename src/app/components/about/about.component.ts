@@ -1,24 +1,29 @@
-import { Component } from '@angular/core';
-
-interface Skill {
-  name: string;
-  level: number;
-}
-
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-about',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
-export class AboutComponent {
-  skills: Skill[] = [
-    { name: 'Frontend Development', level: 95 },
-    { name: 'Backend Development', level: 90 },
-    { name: 'UI/UX Design', level: 85 },
-    { name: 'Database Management', level: 88 },
-    { name: 'Cloud Services', level: 82 },
-    { name: 'DevOps', level: 78 }
-  ];
+export class AboutComponent implements OnInit{
+
+  status!: string;
+  badgeColor!: string;
+
+  ngOnInit() {
+    this.updateStatus();
+  }
+
+  updateStatus() {
+    const currentHour = new Date().getHours();
+    if (currentHour > 12 || currentHour === 0) {
+      this.status = 'Offline';
+      this.badgeColor = 'bg-red-500';
+    } else {
+      this.status = 'Online';
+      this.badgeColor = 'bg-green-500';
+    }
+  }
 }
